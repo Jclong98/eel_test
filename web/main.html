@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Professor</title>
+
+    <script type="text/javascript" src="/eel.js"></script>
+
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/dropdown.css">
+
+</head>
+
+<body>
+
+    <div class="content">
+        <div class="content-item">console out</div>
+        <div class="content-item">
+
+            <div class="table-header">
+                <span>Run Name</span>
+                <span>Date of Run</span>
+                <span>Shapefile</span>
+                <span>Yaw Modification</span>
+            </div>
+
+            <div class="dropdown">
+                <div class="dropdown-header">
+                    <p>Run 5</p>
+                    <p>06/25/1998</p>
+                    <p>f119_rbtn</p>
+                    <p>0</p>
+                </div>
+                <div class="dropdown-content">
+                    Yaw Modification: <input type="number"> <button class="btn bg-blue">Modify Yaw</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="input-bar">
+
+        <script>
+            async function askdirectory() {
+                let path = await eel.askdirectory()();
+                alert(path);
+            }
+        </script>
+
+        <button onclick="askdirectory()" class="btn bg-white">Select filepath</button>&nbsp;
+        <input type="text" size="65" placeholder="/path/to/run/">&nbsp;
+        <button class="btn bg-white">Process</button>
+
+    </div>
+</body>
+
+<script src="js/dropdown.js"></script>
+
+</html>
