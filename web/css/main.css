@@ -22,8 +22,10 @@ body {
     display: flex;
     justify-content: space-around;
     align-items: stretch;
-}
+    height: 500px;
+    overflow: hidden;
 
+}
 
 .content-item {
     margin: 10px;
@@ -31,6 +33,7 @@ body {
     padding: 10px;
     background: white;
     box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
 }
 
 .input-bar {
@@ -42,7 +45,6 @@ body {
     box-shadow: 0 -3px 5px rgba(0, 0, 0, 0.2);
     background: #444edb;
     justify-content: center;
-
 }
 
 .table-header {
@@ -54,16 +56,20 @@ body {
     border-radius: 2em;
     padding: 0.5em 1em;
     border: none;
-}
-
-.bg-white {
     color: #444edb;
     background: white;
     font-weight: bold
 }
 
-.bg-blue {
+.btn-primary {
     background: #444edb;
+    color: white;
+}
+
+.btn-danger {
+    /* border: 2px tomato solid; */
+    /* color: tomato; */
+    background: #e74c3c;
     color: white;
 }
 

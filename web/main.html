@@ -23,19 +23,24 @@
             <div class="table-header">
                 <span>Run Name</span>
                 <span>Date of Run</span>
+                <span>Date Uploaded</span>
                 <span>Shapefile</span>
                 <span>Yaw Modification</span>
             </div>
-
-            <div class="dropdown">
-                <div class="dropdown-header">
-                    <p>Run 5</p>
-                    <p>06/25/1998</p>
-                    <p>f119_rbtn</p>
-                    <p>0</p>
-                </div>
-                <div class="dropdown-content">
-                    Yaw Modification: <input type="number"> <button class="btn bg-blue">Modify Yaw</button>
+            <div id="dropdown-container">
+                <div class="dropdown">
+                    <div class="dropdown-header">
+                        <p>Run 5</p>
+                        <p>06/25/1998</p>
+                        <p>12/11/2019</p>
+                        <p>f119_rbtn</p>
+                        <p>0</p>
+                    </div>
+                    <div class="dropdown-content">
+                        Yaw Modification: <input type="number">
+                        <button class="btn btn-primary">Modify Yaw</button>
+                        <button class="btn btn-danger">Delete Run</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -43,20 +48,109 @@
 
     <div class="input-bar">
 
-        <script>
-            async function askdirectory() {
-                let path = await eel.askdirectory()();
-                alert(path);
-            }
-        </script>
-
-        <button onclick="askdirectory()" class="btn bg-white">Select filepath</button>&nbsp;
-        <input type="text" size="65" placeholder="/path/to/run/">&nbsp;
+        <button onclick="updatePath()" class="btn bg-white">Select filepath</button>&nbsp;
+        <input type="text" size="65" placeholder="/path/to/run/" id="path-input">&nbsp;
         <button class="btn bg-white">Process</button>
 
     </div>
-</body>
 
-<script src="js/dropdown.js"></script>
+    <script>
+        const path_input = document.getElementById("path-input");
+        const dropdown_container = document.getElementById("dropdown-container");
+
+        async function updatePath() {
+            var dir = await eel.askdirectory()();
+
+            // set value to the chosen directory
+            path_input.value = dir;
+        }
+
+        eel.expose(addRunDropdown);
+        function addRunDropdown(values) {
+            console.log(dropdown_container.children);
+
+            // creating a main dropdown element
+            var dropdown = document.createElement("div")
+            dropdown.className = "dropdown";
+
+            // DROPDOWN HEADER
+            var dropdown_header = document.createElement("div");
+            dropdown_header.className = "dropdown-header";
+
+            // first element will always be the sensorrunid
+            var sensorrunid = values[0];
+
+            // header values
+            for (var i = 1; i < values.length; i++) {
+                var item = document.createElement("p");
+                item.innerHTML = values[i];
+                dropdown_header.appendChild(item);
+            }
+
+            var dropdown_content = document.createElement("div");
+            dropdown_content.className = "dropdown-content";
+            dropdown_content.innerHTML = "Yaw Modification: ";
+
+            var yawmod_input = document.createElement("input", type="number");
+            yawmod_input.setAttribute("id", `run-${sensorrunid}`);
+
+            var yawmod_btn = document.createElement("Button");
+            yawmod_btn.innerHTML = "Modify Yaw"
+            yawmod_btn.value = `modify ${sensorrunid}`;
+            yawmod_btn.classList.add("btn", "btn-primary");
+
+            var delete_btn = document.createElement("Button");
+            delete_btn.innerHTML = "Delete Yaw"
+            delete_btn.value = `delete ${sensorrunid}`;
+            delete_btn.classList.add("btn", "btn-danger");
+
+            dropdown_content.appendChild(yawmod_input);
+            dropdown_content.appendChild(yawmod_btn);
+            dropdown_content.appendChild(delete_btn);
+
+            // Yaw Modification: <input type="number">
+            // <button class="btn btn-primary">Modify Yaw</button>
+            // <button class="btn btn-danger">Delete Run</button>
+
+
+            // adding the two main parts to the dropdown
+            dropdown.appendChild(dropdown_header);
+            dropdown.appendChild(dropdown_content);
+
+            dropdown_container.appendChild(dropdown);
+        }
+
+        // sensorrunid=1, 
+        // runname="Run 1",
+        // date_of_run="06/25/1998",
+        // date_uploaded="12/11/2019",
+        // shapefile="f119_rbtn",
+        // yaw_modification=0
+
+        var values = [1, "Run 1", "06/25/1998", "12/11/2019", "f119_rbtn", 0]
+
+        addRunDropdown(values)
+        addRunDropdown(values)
+        addRunDropdown(values)
+        addRunDropdown(values)
+        addRunDropdown(values)
+        addRunDropdown(values)
+        addRunDropdown(values)
+        addRunDropdown(values)
+        addRunDropdown(values)
+        addRunDropdown(values)
+        addRunDropdown(values)
+        addRunDropdown(values)
+        addRunDropdown(values)
+        addRunDropdown(values)
+        addRunDropdown(values)
+        addRunDropdown(values)
+        addRunDropdown(values)
+
+    </script>
+
+    <script src="js/dropdown.js"></script>
+
+</body>
 
 </html>
