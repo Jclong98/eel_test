@@ -128,3 +128,7 @@ input:focus {
 .table-header span {
     width: 25%;
 }
+
+img {
+    width: 100%;
+}

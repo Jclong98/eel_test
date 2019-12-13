@@ -8,6 +8,7 @@ class ConsoleOut:
 
     def write(self, s=''):
         current_time = ''
+        s = str(s)
         if s:
             current_time = datetime.datetime.now().strftime("%H:%M:%S") + ":"
         
@@ -17,13 +18,15 @@ class ConsoleOut:
         pass
 
 # setting the console out to the eel window
-sys.stdout = ConsoleOut()
+cout = ConsoleOut()
+sys.stdout = cout
+print=cout.write
 
 eel.init('web')
 
 @eel.expose
 def askdirectory():
-    print("asking for a run directory", end='')
+    print("asking for a run directory")
     fd.Tk().withdraw()
     filepath = fd.askdirectory()
 
@@ -31,12 +34,12 @@ def askdirectory():
 
 @eel.expose
 def process_run(run_dir):
-    print("processing " + run_dir, end='')
+    print("processing " + run_dir, )
 
 
 
-print("HELLO WORLD", end="")
-print(end="")
-print("This is the professor pipeline!", end="")
+print("HELLO WORLD")
+print()
+print("This is the professor pipeline!")
 
 eel.start('main.html', size=(1220, 720))
