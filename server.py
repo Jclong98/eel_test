@@ -9,9 +9,9 @@ class ConsoleOut:
     def write(self, s=''):
         current_time = ''
         if s:
-            current_time = datetime.datetime.now().strftime("%H:%M:%S") + ": "
+            current_time = datetime.datetime.now().strftime("%H:%M:%S") + ":"
         
-        eel.write(current_time + s)
+        eel.write(s, current_time)
 
     def flush(self):
         pass

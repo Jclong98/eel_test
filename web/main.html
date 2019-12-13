@@ -73,15 +73,27 @@
 
         // exposing a write function to python so that print statements go to the user's view
         eel.expose(write);
-        function write(s) {
-            console.log(s);
+        function write(s, datetime) {
+            console.log(s, datetime);
 
             // making a new line in the console-out
             var line = document.createElement("div");
             line.className = "console-line";
-            line.innerHTML = s; // setting that line's content to the given string
+            
+            var date_display = document.createElement("p");
+            date_display.className = "date-display";
+            date_display.innerHTML = datetime;
 
+            var line_text = document.createElement("p");
+            line_text.innerHTML = s;
+
+            line.appendChild(date_display);
+            line.appendChild(line_text);
+
+            // adding the line to the console
             console_out.appendChild(line);
+
+            // scrolling to the bottom after a line is added
             console_out.scrollTop = console_out.scrollHeight;
         }
 

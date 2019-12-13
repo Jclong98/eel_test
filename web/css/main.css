@@ -46,7 +46,13 @@ body {
 }
 
 .console-line {
-    min-height: 1em;
+    /* min-height: 1em; */
+    display: flex;
+}
+
+.date-display {
+    color: rgba(0, 24, 129, 0.5);
+    margin-right: 0.5em;
 }
 
 .input-bar {
@@ -56,7 +62,7 @@ body {
     background: white;
     padding: 10px;
     box-shadow: 0 -3px 5px rgba(0, 0, 0, 0.2);
-    background: #444edb;
+    background: #555ddd;
     justify-content: center;
 }
 
@@ -69,14 +75,14 @@ body {
     border-radius: 3px;
     padding: 0.5em 1em;
     border: none;
-    color: #444edb;
+    color: #555ddd;
     background: white;
     font-weight: bold;
     border-bottom: 2px solid rgba(0, 0, 0, 0.3);
 }
 
 .btn-primary {
-    background: #444edb;
+    background: #555ddd;
     color: white;
 }
 
