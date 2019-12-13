@@ -1,9 +1,4 @@
-#dropdown-container {
-    height: 100%;
-    flex: 1;
-    overflow-y: scroll;
-    padding-bottom: 80px;
-}
+
 
 .dropdown {
     background: #dbddff;
@@ -12,7 +7,10 @@
     border: 1px solid rgba(0, 0, 0, 0.1);
     border-radius: 3px;
     overflow: hidden;
-    margin: 7px 0;
+    margin: 5px 0;
+
+    min-height: min-content;
+    display: flex;
 }
 
 .dropdown-header {
