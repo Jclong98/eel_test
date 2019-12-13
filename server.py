@@ -11,6 +11,8 @@ class ConsoleOut:
         s = str(s)
         if s:
             current_time = datetime.datetime.now().strftime("%H:%M:%S") + ":"
+        else:
+            current_time = ''
         
         eel.write(s, current_time)
 
