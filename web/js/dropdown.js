@@ -1,8 +1,10 @@
 const dropdown_container = document.getElementById("dropdown-container");
 
 // setting up the dropdowns and allowing them to be created with python
-eel.expose(addRunDropdown);
-function addRunDropdown(values) {
+eel.expose(add_run_dropdown);
+function add_run_dropdown(values) {
+
+    console.log(values)
 
     // creating a main dropdown element
     var dropdown = document.createElement("div")
@@ -12,15 +14,17 @@ function addRunDropdown(values) {
     var dropdown_header = document.createElement("div");
     dropdown_header.className = "dropdown-header";
 
-    // first element will always be the sensorrunid
-    var sensorrunid = values[0];
+    // filling the header with each of the values in the given object
+    Object.entries(values).forEach(([key,value])=>{
+        // skipping the sensorrunid
+        if (key != "sensorrunid"){
+            var item = document.createElement("p");
+            item.innerHTML = value;
+            dropdown_header.appendChild(item);
+        }
+    })
 
-    // header values
-    for (var i = 1; i < values.length; i++) {
-        var item = document.createElement("p");
-        item.innerHTML = values[i];
-        dropdown_header.appendChild(item);
-    }
+    console.log("past header creation")
 
     // DROPDOWN CONTENT
     var dropdown_content = document.createElement("div");
@@ -28,20 +32,37 @@ function addRunDropdown(values) {
     dropdown_content.innerHTML = "Yaw Modification: ";
 
     // yawmod number input
-    var yawmod_input = document.createElement("input", type="number");
-    yawmod_input.setAttribute("id", `run-${sensorrunid}`);
+    var yawmod_input = document.createElement("input");
+    yawmod_input.setAttribute("type", "number");
+    yawmod_input.value = 0;
 
     // yawmod button
     var yawmod_btn = document.createElement("Button");
-    yawmod_btn.innerHTML = "Modify Yaw"
-    yawmod_btn.value = `modify ${sensorrunid}`;
+    yawmod_btn.innerHTML = "Modify Yaw";
+    yawmod_btn.value = "";
     yawmod_btn.classList.add("btn", "btn-primary");
+
+    // adding the functionality to the yawmod button
+    yawmod_btn.onclick = () => {
+        var degrees = yawmod_input.value
+
+        if (confirm(`You are about to modify ${values['runname']} by ${degrees}º`)) {
+            eel.modify_yaw(values, degrees);
+        } 
+    }
 
     // delete run button
     var delete_btn = document.createElement("Button");
-    delete_btn.innerHTML = "Delete Yaw"
-    delete_btn.value = `delete ${sensorrunid}`;
+    delete_btn.innerHTML = "Delete Yaw";
+    delete_btn.value = "";
     delete_btn.classList.add("btn", "btn-danger");
+
+    // adding functionality to the delete button
+    delete_btn.onclick = () => {
+        if (confirm(`Are you sure you want to delete ${values['runname']}?`)) {
+            eel.delete_run(values);
+        } 
+    }
 
     // adding the three inputs to the dropdown content
     dropdown_content.appendChild(yawmod_input);
@@ -54,67 +75,58 @@ function addRunDropdown(values) {
 
     // adding the dropdown to the container
     dropdown_container.appendChild(dropdown);
-}
 
-// sensorrunid=1, 
-// runname="Run 1",
-// date_of_run="06/25/1998",
-// date_uploaded="12/11/2019",
-// shapefile="f119_rbtn",
-// yaw_modification=0
+}
 
 // creating a bunch of dropdowns
-var values = [1, "Run 1", "06/25/1998", "12/11/2019", "f119_rbtn", 0]
 
-addRunDropdown(values)
-addRunDropdown(values)
-addRunDropdown(values)
-addRunDropdown(values)
-addRunDropdown(values)
-addRunDropdown(values)
-addRunDropdown(values)
-addRunDropdown(values)
-addRunDropdown(values)
-addRunDropdown(values)
-addRunDropdown(values)
-addRunDropdown(values)
-addRunDropdown(values)
-addRunDropdown(values)
-addRunDropdown(values)
-addRunDropdown(values)
-addRunDropdown(values)
+var values = {
+    "sensorrunid":1,
+    "runname":"Run 1",
+    "date_of_run":"06/25/1998",
+    "date_uploaded":"12/11/2019",
+    "shapefile":"f119_rbtn",
+    "yawmod":0
+};
 
-// making all the dropdowns actually function
-var dropdowns = document.getElementsByClassName("dropdown");
+eel.expose(update_dropdowns);
+function update_dropdowns() {
 
-function dropdown(element) {
-    /* 
-    finds the children of an element labeled 
-    dropdown and adds an event listener to the title 
-    that shows/hides content on click
-     */
+    // making all the dropdowns actually function
+    var dropdowns = document.getElementsByClassName("dropdown");
 
-    var header = element.children[0];
-    var content = element.children[1];
+    function dropdown(element) {
+        /* 
+        finds the children of an element labeled 
+        dropdown and adds an event listener to the title 
+        that shows/hides content on click
+        */
 
-    var is_open = false;
+        var header = element.children[0];
+        var content = element.children[1];
 
-    header.addEventListener("click", () => {
+        var is_open = false;
 
-        if (is_open) {
-            content.style.height = "0";
-            content.style.display = "none";
-            is_open = false;
-        }
-        else {
-            content.style.height = "auto";
-            content.style.display = "flex";
-            is_open = true;
-        }
-    });
+        header.addEventListener("click", () => {
+
+            console.log("clicked")
+            if (is_open) {
+                content.style.height = "0";
+                content.style.display = "none";
+                is_open = false;
+            }
+            else {
+                content.style.height = "auto";
+                content.style.display = "flex";
+                is_open = true;
+            }
+        });
+    }
+
+    // iterating over each element with the class dropdown and applying dropdown()
+    for (var i = 0; i < dropdowns.length; i++) {
+        dropdown(dropdowns[i]);
+    }
 }
 
-// iterating over each element with the class dropdown and applying dropdown()
-for (var i = 0; i < dropdowns.length; i++) {
-    dropdown(dropdowns[i]);
-}
+update_dropdowns();

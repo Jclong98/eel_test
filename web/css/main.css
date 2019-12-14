@@ -66,11 +66,6 @@ body {
     justify-content: center;
 }
 
-.table-header {
-    display: flex;
-    justify-content: space-around;
-}
-
 .btn {
     border-radius: 3px;
     padding: 0.5em 1em;
@@ -131,4 +126,20 @@ input:focus {
 
 img {
     width: 100%;
+}
+
+.color-success {
+    color: #2ecc71
+}
+
+.color-warn {
+    color: orange;
+}
+
+.color-danger {
+    color: #e74c3c;
+}
+
+.modal {
+    
 }
