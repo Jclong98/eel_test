@@ -15,9 +15,9 @@ function add_run_dropdown(values) {
     dropdown_header.className = "dropdown-header";
 
     // filling the header with each of the values in the given object
-    Object.entries(values).forEach(([key,value])=>{
+    Object.entries(values).forEach(([key, value]) => {
         // skipping the sensorrunid
-        if (key != "sensorrunid"){
+        if (key != "sensorrunid") {
             var item = document.createElement("p");
             item.innerHTML = value;
             dropdown_header.appendChild(item);
@@ -48,12 +48,12 @@ function add_run_dropdown(values) {
 
         if (confirm(`You are about to modify ${values['runname']} by ${degrees}º`)) {
             eel.modify_yaw(values, degrees);
-        } 
+        }
     }
 
     // delete run button
     var delete_btn = document.createElement("Button");
-    delete_btn.innerHTML = "Delete Yaw";
+    delete_btn.innerHTML = "Delete Run";
     delete_btn.value = "";
     delete_btn.classList.add("btn", "btn-danger");
 
@@ -61,7 +61,7 @@ function add_run_dropdown(values) {
     delete_btn.onclick = () => {
         if (confirm(`Are you sure you want to delete ${values['runname']}?`)) {
             eel.delete_run(values);
-        } 
+        }
     }
 
     // adding the three inputs to the dropdown content
@@ -81,47 +81,49 @@ function add_run_dropdown(values) {
 // creating a bunch of dropdowns
 
 var values = {
-    "sensorrunid":1,
-    "runname":"Run 1",
-    "date_of_run":"06/25/1998",
-    "date_uploaded":"12/11/2019",
-    "shapefile":"f119_rbtn",
-    "yawmod":0
+    "sensorrunid": 1,
+    "runname": "Run 1",
+    "date_of_run": "06/25/1998",
+    "date_uploaded": "12/11/2019",
+    "shapefile": "f119_rbtn",
+    "yawmod": 0
 };
+
+
+function dropdown(element) {
+    /* 
+    finds the children of an element labeled 
+    dropdown and adds an event listener to the title 
+    that shows/hides content on click
+    */
+
+    var header = element.children[0];
+    var content = element.children[1];
+
+    var is_open = false;
+
+    header.addEventListener("click", () => {
+
+        console.log("clicked")
+        if (is_open) {
+            content.style.height = "0";
+            content.style.display = "none";
+            is_open = false;
+        }
+        else {
+            content.style.height = "auto";
+            content.style.display = "flex";
+            content.style.flexDirection = "row";
+            is_open = true;
+        }
+    });
+}
 
 eel.expose(update_dropdowns);
 function update_dropdowns() {
 
     // making all the dropdowns actually function
     var dropdowns = document.getElementsByClassName("dropdown");
-
-    function dropdown(element) {
-        /* 
-        finds the children of an element labeled 
-        dropdown and adds an event listener to the title 
-        that shows/hides content on click
-        */
-
-        var header = element.children[0];
-        var content = element.children[1];
-
-        var is_open = false;
-
-        header.addEventListener("click", () => {
-
-            console.log("clicked")
-            if (is_open) {
-                content.style.height = "0";
-                content.style.display = "none";
-                is_open = false;
-            }
-            else {
-                content.style.height = "auto";
-                content.style.display = "flex";
-                is_open = true;
-            }
-        });
-    }
 
     // iterating over each element with the class dropdown and applying dropdown()
     for (var i = 0; i < dropdowns.length; i++) {

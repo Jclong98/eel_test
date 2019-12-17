@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <style>
+        .tabbed-window {
+            background: rgba(0, 0, 0, 0.1);
+            width: 500px;
+        }
+
+        .tab-area {
+            display: flex;
+            margin-bottom: 1em;
+        }
+
+        .tab {
+            padding: 0.5em 0.5em;
+        }
+
+        .tab:hover {
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        .active {
+            border-bottom: 1px coral solid;
+        }
+
+    
+    </style>
+
+</head>
+<body>
+
+    <button>Add Tab</button>
+    <div class="tabbed-window">
+
+        <!-- TAB HEADERS -->
+        <div class="tab-area">
+            <a class="tab active" href="#console-out">Console Out</a>
+            <a class="tab" href="#run-viewer">Run Viewer</a>
+        </div>
+
+        <!-- TAB CONTENT DISPLAY -->
+        <div class="tab-content-area">
+            <div class="tab-content" id="console-out">
+                Tab Content 1
+            </div>
+            <div class="tab-content" id="run-viewer">
+                Tab Content 2
+            </div>
+        </div>
+    </div>
+
+    <script>
+
+        function onTabClick(event) {
+            let activeTabs = document.querySelectorAll('.active');
+
+            activeTabs.forEach((tab) => {
+                tab.className = tab.className.replace('active', '');
+            });
+        }
+
+
+        const tabs = document.getElementById("tab-area");
+        tabs.addEventListener('click', onTabClick, false)
+
+    </script>
+
+</body>
+</html>

@@ -82,8 +82,6 @@ body {
 }
 
 .btn-danger {
-    /* border: 2px tomato solid; */
-    /* color: tomato; */
     background: #e74c3c;
     color: white;
 }
@@ -140,6 +138,3 @@ img {
     color: #e74c3c;
 }
 
-.modal {
-    
-}
