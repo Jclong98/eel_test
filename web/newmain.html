@@ -20,7 +20,7 @@
 
         main {
             display: grid;
-            grid-template-columns: 2fr 3fr;
+            grid-template-columns: 4fr 5fr;
             grid-template-rows: 100vh;
         }
 
@@ -108,9 +108,16 @@
 
         .run-headers-container {
             margin-top: 3em;
-            display: grid;
-            grid-template-rows: 1fr auto;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+        
+        .run-headers {
+            display: flex;
+            flex-direction: column;
             overflow-y: scroll;
+            flex: 1;
         }
 
         .run-display {
@@ -123,6 +130,7 @@
 
         .fake-graph {
             background: linear-gradient(135deg, cyan, blue);
+            background: #f1f5ff;
             height: 100%;
             display: grid;
             place-items: center;
@@ -148,7 +156,13 @@
             filter: brightness(110%);
         }
 
-        
+        .completed {
+            border-bottom: 4px #2ecc71 solid;
+        }
+
+        .in-progress {
+            border-bottom: 4px #ffbe76 solid;
+        }
     </style>
 
 </head>
@@ -169,27 +183,27 @@
                 <h1 class="title span-all">View Runs</h1>
                 <div class="run-headers">
 
-                    <div class="row run-header btn">
+                    <div class="row run-header btn in-progress">
                         <span>Professor_2019_12_16_Run_13</span>
                         <span>06/25/1998</span>
                     </div>
-                    <div class="row run-header btn">
+                    <div class="row run-header btn completed">
                         <span>Professor_2019_12_16_Run_13</span>
                         <span>06/25/1998</span>
                     </div>
-                    <div class="row run-header btn">
+                    <div class="row run-header btn completed">
                         <span>Professor_2019_12_16_Run_13</span>
                         <span>06/25/1998</span>
                     </div>
-                    <div class="row run-header btn">
+                    <div class="row run-header btn completed">
                         <span>Professor_2019_12_16_Run_13</span>
                         <span>06/25/1998</span>
                     </div>
-                    <div class="row run-header btn">
+                    <div class="row run-header btn completed">
                         <span>Professor_2019_12_16_Run_13</span>
                         <span>06/25/1998</span>
                     </div>
-                    <div class="row run-header btn">
+                    <div class="row run-header btn completed">
                         <span>Professor_2019_12_16_Run_13</span>
                         <span>06/25/1998</span>
                     </div>
