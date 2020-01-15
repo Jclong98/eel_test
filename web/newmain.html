@@ -156,12 +156,33 @@
             filter: brightness(110%);
         }
 
+        .message-box {
+            border: 1px rgba(0, 0, 0, 0.1) solid;
+            display: flex;
+            flex-direction: column;
+            height: 90px;
+            overflow-y: scroll;
+            border-radius: 3px;
+        }
+
+        .info {
+            border-left: 4px skyblue solid;
+        }
+
         .completed {
-            border-bottom: 4px #2ecc71 solid;
+            border-left: 4px #2ecc71 solid;
         }
 
         .in-progress {
-            border-bottom: 4px #ffbe76 solid;
+            border-left: 4px #ffbe76 solid;
+        }
+
+        .failed {
+            border-left: 4px tomato solid;
+        }
+
+        .message-box p {
+            padding: 1em;
         }
     </style>
 
@@ -177,6 +198,16 @@
                 <button class="btn btn-left">Select Run</button><input class="input-right" type="text">
                 <button class="btn btn-left">Select Shapefile</button><input class="input-right" type="text">
                 <button class="btn span-all" id="btn-process">Process Run</button>
+
+                <div class="message-box span-all">
+                    <p class="info">gathering exif from run 12</p>
+                    <p class="info">run 12 completed!</p>
+                    <p class="info">run 12 completed!</p>
+                    <p class="info">run 12 completed!</p>
+                    <p class="warn">run 12 completed!</p>
+                    <p class="completed">run 12 completed!</p>
+                </div>
+                <!-- <p class="message-box span-all failed">error uploading run 12</p> -->
             </div>
 
             <div class="run-headers-container">
@@ -195,7 +226,7 @@
                         <span>Professor_2019_12_16_Run_13</span>
                         <span>06/25/1998</span>
                     </div>
-                    <div class="row run-header btn completed">
+                    <div class="row run-header btn failed">
                         <span>Professor_2019_12_16_Run_13</span>
                         <span>06/25/1998</span>
                     </div>
